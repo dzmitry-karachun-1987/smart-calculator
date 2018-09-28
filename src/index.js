@@ -1,26 +1,60 @@
 class SmartCalculator {
   constructor(initialValue) {
-    // your implementation
+    this.value = initialValue;
+    this.res = [this.value];
   }
 
   add(number) {
-    // your implementation
+    this.res.push('+');
+    this.res.push(number);
+  	return this;
   }
-  
+
   subtract(number) {
-    // your implementation
+    this.res.push('-');
+    this.res.push(number);
+  	return this;
   }
 
   multiply(number) {
-    // your implementation
+    this.res.push('*');
+    this.res.push(number);
+  	return this;
   }
 
   devide(number) {
-    // your implementation
+    this.res.push('/');
+    this.res.push(number);
+  	return this;
   }
 
   pow(number) {
-    // your implementation
+    this.res.push(number+'pow');
+  	return this;
+  }
+
+  convertToString(array) {
+    var temp = null;
+    for(var i = array.length-1; i>=0; i--) {
+      if (typeof array[i] !== 'number') {
+        if (array[i].includes('pow')) {
+          temp = Math.pow(parseInt(array[i-1]), parseInt(array[i]));
+          if (typeof array[i-1] === 'number') {
+            array[i-1] = temp;
+            array[i] = null;
+          } else {
+            array[i-1] = temp + 'pow';
+            array[i] = null;
+          }
+        }
+      }
+    }
+    return array.join('');
+  }
+
+  valueOf() {
+    var str = this.convertToString(this.res);
+    return eval(str);
   }
 }
 
