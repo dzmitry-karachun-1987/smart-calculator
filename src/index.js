@@ -34,8 +34,8 @@ class SmartCalculator {
   }
 
   convertToString(array) {
-    var temp = null;
-    for(var i = array.length-1; i>=0; i--) {
+    let temp = null;
+    for(let i = array.length-1; i >= 0; i--) {
       if (typeof array[i] !== 'number') {
         if (array[i].includes('pow')) {
           temp = Math.pow(parseInt(array[i-1]), parseInt(array[i]));
@@ -53,7 +53,7 @@ class SmartCalculator {
   }
 
   valueOf() {
-    var str = this.convertToString(this.res);
+    let str = this.convertToString(this.res);
     return eval(str);
   }
 }
